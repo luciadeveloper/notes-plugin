@@ -1,4 +1,5 @@
 === Notes Plugin ===
+
 Contributors: Lucia developer
 Tags: notes, simple notes
 Tested up to: 5.2
