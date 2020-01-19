@@ -1,5 +1,5 @@
 === Notes Plugin ===
-Contributors: Lucia develoepr
+Contributors: Lucia developer
 Tags: notes, simple notes
 Tested up to: 5.2
 Requires PHP: 5.6
