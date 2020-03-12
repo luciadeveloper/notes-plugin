@@ -93,10 +93,10 @@ class NotesPage {
 		wp_enqueue_style( 'notes');
 	}
 	
-    public function __construct() {
-        // Enqueue styles for the admin
-        add_action( 'admin_enqueue_scripts', array( $this, 'wp_enqueue_styles' ), 20 );
-        add_action( 'admin_menu', array($this,'notes_admin_page_menu') );
+	public function __construct() {
+		// Enqueue styles for the admin
+		add_action( 'admin_enqueue_scripts', array( $this, 'wp_enqueue_styles' ), 20 );
+		add_action( 'admin_menu', array($this,'notes_admin_page_menu') );
 	}
 	
 	public function notes_admin_page_menu() {
@@ -184,7 +184,7 @@ class NotesPage {
 				</div>
 				<div class="span5">
 					<?php $this->showNotes();?>
-			 </div>
+				</div>
 		 </div>
 		</section>
 	<?php 
