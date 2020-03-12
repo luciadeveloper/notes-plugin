@@ -178,13 +178,13 @@ class NotesPage {
 		<section id="notes-plugin">
 		<h1 class="wp-heading-inline"><?php  _e('Notes','Notes') ?></h1>
 		<div class="wrapper">
-				<div class="span7">		
-					<?php $this->renderForm(); ?>
-					<?php $this->insertNote(); ?>
-				</div>
-				<div class="span5">
-					<?php $this->showNotes();?>
-				</div>
+			<div class="span7">		
+				<?php $this->renderForm(); ?>
+				<?php $this->insertNote(); ?>
+			</div>
+			<div class="span5">
+				<?php $this->showNotes();?>
+			</div>
 		 </div>
 		</section>
 	<?php 
