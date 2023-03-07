@@ -2,7 +2,7 @@
 /*
 Plugin Name:  Notes
 Description:  This plugin enables notes for the WordPress dashboard users
-Author: 	  Lucia Developer
+Author:       Lucia Developer
 Author URI:   https://luciadeveloper.com
 Version:      0.1
 License:      GPL2
@@ -32,13 +32,13 @@ class Note {
 
     public function __construct() {
         // Register the post type
-        add_action('init', array($this, 'registerCPT'));
+        add_action( 'init', array( $this, 'register_cpt' ) );
     }
 
      /**
      * Register post type
      */
-    public function registerCPT() {
+    public function register_cpt() {
         $labels = array(
             'name'                  => $this->name,
             'singular_name'         => $this->singular_name,
@@ -49,8 +49,8 @@ class Note {
             'all_items'             => 'All '       . $this->name,
             'view_item'             => 'View '      . $this->name,
             'search_items'          => 'Search '    . $this->name,
-            'not_found'             => 'No '        . strtolower($this->name) . ' found',
-            'not_found_in_trash'    => 'No '        . strtolower($this->name) . ' found in Trash',
+            'not_found'             => 'No '        . strtolower( $this->name ) . ' found',
+            'not_found_in_trash'    => 'No '        . strtolower( $this->name ) . ' found in Trash',
             'parent_item_colon'     => '',
             'menu_name'             => $this->name
         );
@@ -69,6 +69,7 @@ class Note {
             'supports'              => array(),
             'yarpp_support'         => false
         );
+	    
         register_post_type( $this->type, $args );
     }
 
@@ -90,21 +91,27 @@ $note = new Note();
 class NotesPage {
 
 	public function wp_enqueue_styles() {
+		
 		wp_register_style( 'notes', plugins_url( 'assets/css/custom.css', __FILE__ ), array(), filemtime( plugin_dir_path( __FILE__ ) . 'assets/css/custom.css' ) );
 		wp_enqueue_style( 'notes');
+		
 	}
 
 	public function __construct() {
+		
 		// Enqueue styles for the admin
 		add_action( 'admin_enqueue_scripts', array( $this, 'wp_enqueue_styles' ), 20 );
 		add_action( 'admin_menu', array($this,'notes_admin_page_menu') );
+		
 	}
 
 	public function notes_admin_page_menu() {
+		
 		add_menu_page( 'notes', 'Notes', 'edit_posts', 'notes', array($this,'notes_admin_page'), 'dashicons-format-aside', 6 ) ;
+		
 	}
 
-	function renderForm(){
+	function render_form(){
 		?>
 		<form method="POST" action="" id="notes-form">
 			<label for="post_content"><h2><?php echo _e('Add your note','Notes')?></h2></label>
@@ -115,9 +122,10 @@ class NotesPage {
 		<?php
 	}
 
-	function insertNote(){
+	function insert_note(){
+		
 		//insterts a new note, with the info submited on the form.
-		if(isset($_POST['new_post']) == '1'){
+		if(isset( $_POST['new_post']) == '1' ){
 
 			$user_id = get_current_user_id();
 			$post_content = $_POST['post_content'];
@@ -125,7 +133,7 @@ class NotesPage {
 			// Create post object
 			$my_post = array(
 			  'post_title'    => 'note',
-			  'post_content'  => sanitize_text_field($post_content),
+			  'post_content'  => sanitize_text_field( $post_content ),
 			  'post_type'	  => 'note',
 			  'post_author'   => $user_id,
 			  'post_status'   => 'publish',
@@ -133,11 +141,11 @@ class NotesPage {
 			);
 
 			// Insert the post into the database
-			wp_insert_post($my_post);
+			wp_insert_post( $my_post );
 		}
 	}
 
-	function showNotes(){
+	function show_notes(){
 		// get notes
 		$args = array(
 		  'post_type'      => 'note',
@@ -174,17 +182,18 @@ class NotesPage {
 	}
 
 	function notes_admin_page() {
+		
 		//creating the admin page
 		?>
 		<section id="notes-plugin">
 			<h1 class="wp-heading-inline"><?php  _e('Notes','Notes') ?></h1>
 			<div class="wrapper">
 				<div class="span7">
-					<?php $this->renderForm(); ?>
-					<?php $this->insertNote(); ?>
+					<?php $this->render_form(); ?>
+					<?php $this->insert_note(); ?>
 				</div>
 				<div class="span5">
-					<?php $this->showNotes();?>
+					<?php $this->show_notes();?>
 				</div>
 			</div>
 		</section>
