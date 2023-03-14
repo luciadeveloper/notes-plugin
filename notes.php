@@ -87,7 +87,6 @@ $note = new Note();
  * Class NotesPage
  *
  */
-
 class NotesPage {
 
 	public function wp_enqueue_styles() {
