@@ -158,17 +158,21 @@ class NotesPage {
 		<ul><?php
 			//prin the list of notes, if there are some
 			if ( $notes ) {
-		        foreach ( $notes as $note ) :
+		       
+				foreach ( $notes as $note ) :
+				
 					setup_postdata( $note );
-					$authorId = $note->post_author;
-					$author = get_user_by( 'id', $authorId )->display_name;
-					$url = get_bloginfo('url');
+					
+					$authorId    = $note->post_author;
+					$author      = get_user_by( 'id', $authorId )->display_name;
+					$url         = get_bloginfo('url');
 					$noteContent = esc_html($note->post_content)
+					
 					?>
 					<li>
 						<?php echo $noteContent ;?> <!-- print note content -->
 						<span class="note-author"><?php echo '- by '.$author; ?></span><!-- print note author -->
-						<?php echo "<a class='remove-note' href='" . wp_nonce_url( get_bloginfo('url') . "/wp-admin/post.php?action=delete&amp;post=" . $note->ID, 'delete-post_' . $note->ID) . "'></a>"; ?><!-- print delete button -->
+						<?php echo "<a class='remove-note' href='" . wp_nonce_url( get_bloginfo('url') . "/wp-admin/post.php?action=delete&amp;post=" . $note->ID, 'delete-post_' . $note->ID ) . "'></a>"; ?><!-- print delete button -->
 					</li>
 					<?php
 		        endforeach;
